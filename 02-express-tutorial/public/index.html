@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Express App</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <h1>Welcome to my Express App</h1>
+    <button id="fetch-products">Get Products</button>
+    <div id="product-list"></div>
+
+    <script>
+      document
+        .getElementById("fetch-products")
+        .addEventListener("click", async () => {
+          const response = await fetch("/api/v1/products");
+          const products = await response.json();
+
+          const productList = document.getElementById("product-list");
+          productList.innerHTML = ""; // Clear previous data
+
+          products.forEach((product) => {
+            const productItem = document.createElement("div");
+            productItem.innerHTML = `<strong>${product.name}</strong> - $${product.price}`;
+            productList.appendChild(productItem);
+          });
+        });
+    </script>
+  </body>
+</html>
