@@ -2,7 +2,7 @@ const { people } = require("../data");
 
 // GET /api/v1/people
 const getPeople = (req, res) => {
-  res.json(people);
+  res.status(200).json({ success: true, data: people });
 };
 
 // POST /api/v1/people
