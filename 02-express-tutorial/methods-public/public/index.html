@@ -19,11 +19,19 @@
           const products = await response.json();
 
           const productList = document.getElementById("product-list");
-          productList.innerHTML = ""; // Clear previous data
+          productList.innerHTML = ""; // clear before new info
 
           products.forEach((product) => {
             const productItem = document.createElement("div");
-            productItem.innerHTML = `<strong>${product.name}</strong> - $${product.price}`;
+            productItem.style.margin = "10px";
+            productItem.style.border = "1px solid #ddd";
+            productItem.style.padding = "10px";
+
+            productItem.innerHTML = `
+      <img src="${product.image}" alt="${product.name}" style="width: 100px; height: auto; display: block; margin-bottom: 10px;">
+      <strong>${product.name}</strong> - $${product.price}
+    `;
+
             productList.appendChild(productItem);
           });
         });

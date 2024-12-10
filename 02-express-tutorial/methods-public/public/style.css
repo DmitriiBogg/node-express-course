@@ -1,6 +1,6 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #92bfb6;
+  background-color: #dbc277d9;
   color: #333;
   margin: 0;
   padding: 0;
@@ -8,7 +8,7 @@ body {
 
 h1 {
   text-align: center;
-  color: #4caf50;
+  color: rgb(30, 149, 44);
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 }
 
@@ -16,27 +16,37 @@ button {
   display: block;
   margin: 20px auto;
   padding: 10px 20px;
+  font-weight: bold;
+  font-style: italic;
   font-size: 16px;
-  background-color: #4caf50;
-  color: #ffffff;
+  background-color: rgb(30, 149, 44);
+  color: #0b2102;
   border: none;
   border-radius: 5px;
   cursor: pointer;
 }
 
 button:hover {
-  background-color: #45a049;
+  background-color: #f0a80e;
 }
 
 #product-list div {
+  display: inline-block;
+  text-align: center;
   margin: 10px;
-  padding: 10px;
   border: 1px solid #ddd;
   border-radius: 5px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
   background-color: #f0a80e;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 #product-list div:hover {
-  background-color: aquamarine;
+  background-color: rgb(30, 149, 44);
+}
+
+#product-list img {
+  max-width: 100%;
+  height: auto;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 10px;
 }
