@@ -21,12 +21,12 @@ module.exports = function (roles) {
         }
       });
       if (!hasRole) {
-        return res.status(403).json({ message: "no access" });
+        return res.status(401).json({ message: "Invalid credentials" });
       }
       next();
     } catch (e) {
       console.log(e);
-      return res.status(403).json({ message: "user is not authorized" });
+      return res.status(401).json({ message: "Invalid credentials" });
     }
   };
 };

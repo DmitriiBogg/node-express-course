@@ -21,7 +21,7 @@ app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/jobs", jobsRouter);
 app.use("/api/v1/auth", authRouter);
-app.use("/api/v1/jobs", authMiddleware, jobsRouter); // not sure needs jobsRouter again? ( looks like not but exist different lvl for access)
+app.use("/api/v1/jobs", authMiddleware);
 app.get("/", (req, res) => {
   res.send("jobs api");
 });
@@ -41,15 +41,17 @@ app.use(cors());
 app.use(xss());
 
 const port = process.env.PORT || 3000;
-
+console.log("Starting the server...");
 const start = async () => {
   try {
     await connectDB(process.env.MONGO_URI);
+    console.log("MongoDB connected successfully!");
     app.listen(port, () =>
-      console.log(`Server is listening on port ${port}...`)
+      console.log(`Server is listening on port http://localhost:${port}...`)
     );
   } catch (error) {
     console.log(error);
+    process.exit(1);
   }
 };
 

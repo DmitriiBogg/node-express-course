@@ -10,7 +10,7 @@ const generateAccessToken = (id, roles) => {
   return jwt.sign(payload, secret, { expiresIn: "24h" });
 };
 
-class authController {
+class AuthController {
   async registration(req, res) {
     try {
       const errors = validationResult(req);
@@ -45,11 +45,11 @@ class authController {
       const { username, password } = req.body;
       const user = await User.findOne({ username });
       if (!user) {
-        return res.status(400).json({ message: `user ${username} not found` });
+        return res.status(400).json({ message: "Invalid credentials" });
       }
       const validPassword = bcrypt.compareSync(password, user.password);
       if (!validPassword) {
-        return res.status(400).json({ message: "wrong password" });
+        return res.status(400).json({ message: "Invalid credentials" });
       }
       const token = generateAccessToken(user._id, user.roles);
       return res.json({ token });
@@ -72,4 +72,4 @@ class authController {
   }
 }
 
-module.exports = new authController();
+module.exports = new AuthController();
