@@ -14,6 +14,8 @@ const rateLimiter = require("express-rate-limit");
 // error handler
 const notFoundMiddleware = require("./middleware/not-found");
 const errorHandlerMiddleware = require("./middleware/error-handler");
+//new lesson week 11
+app.use(express.static("public"));
 
 // use section
 app.use(express.json());
@@ -22,9 +24,9 @@ app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/jobs", jobsRouter);
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/jobs", authMiddleware);
-app.get("/", (req, res) => {
-  res.send("jobs api");
-});
+//app.get("/", (req, res) => {
+//  res.send('<h1>Jobs API</h1><a href="/api-docs">Documentation</a>');
+//});
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
