@@ -29,9 +29,7 @@ export const handleJobs = () => {
         message.textContent = "You have been logged off.";
         jobsTable.replaceChildren([jobsTableHeader]);
         showLoginRegister();
-      }
-      // Обработчик для удаления
-      else if (e.target.classList.contains("deleteButton")) {
+      } else if (e.target.classList.contains("deleteButton")) {
         enableInput(false);
         try {
           const jobId = e.target.dataset.id;
@@ -44,8 +42,8 @@ export const handleJobs = () => {
 
           const data = await response.json();
           if (response.status === 200) {
-            message.textContent = data.msg; // "The entry was deleted."
-            e.target.closest("tr").remove(); // Удаление строки из таблицы
+            message.textContent = data.msg;
+            e.target.closest("tr").remove();
           } else {
             message.textContent = data.msg;
           }
@@ -54,7 +52,50 @@ export const handleJobs = () => {
           message.textContent = "A communication error occurred.";
         }
         enableInput(true);
+      } else if (e.target.classList.contains("editButton")) {
+        const jobId = e.target.dataset.id;
+        showAddEdit(jobId);
       }
     }
   });
+};
+
+export const showJobs = async () => {
+  enableInput(false);
+  try {
+    const response = await fetch("/api/v1/jobs", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const data = await response.json();
+    if (response.status === 200) {
+      jobsTable.replaceChildren([jobsTableHeader]);
+      if (data.jobs.length === 0) {
+        message.textContent = "No jobs found.";
+      } else {
+        data.jobs.forEach((job) => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td>${job.company}</td>
+            <td>${job.position}</td>
+            <td>${job.status}</td>
+            <td><button class="editButton" data-id="${job._id}">Edit</button></td>
+            <td><button class="deleteButton" data-id="${job._id}">Delete</button></td>
+          `;
+          jobsTable.appendChild(row);
+        });
+        message.textContent = "Jobs loaded successfully.";
+      }
+      setDiv(jobsDiv);
+    } else {
+      message.textContent = data.msg;
+    }
+  } catch (err) {
+    console.error(err);
+    message.textContent = "A communication error occurred.";
+  }
+  enableInput(true);
 };
