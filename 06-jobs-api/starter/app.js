@@ -20,10 +20,9 @@ app.use(express.static("public"));
 // use section
 app.use(express.json());
 app.use("/api/v1/auth", authRouter);
-app.use("/api/v1/auth", authRouter);
-app.use("/api/v1/jobs", jobsRouter);
-app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/jobs", authMiddleware);
+app.use("/api/v1/jobs", jobsRouter);
+
 //app.get("/", (req, res) => {
 //  res.send('<h1>Jobs API</h1><a href="/api-docs">Documentation</a>');
 //});

@@ -27,7 +27,7 @@ export const handleJobs = () => {
       } else if (e.target === logoff) {
         setToken(null);
         message.textContent = "You have been logged off.";
-        jobsTable.replaceChildren([jobsTableHeader]);
+        jobsTable.replaceChildren(jobsTableHeader);
         showLoginRegister();
       } else if (e.target.classList.contains("deleteButton")) {
         enableInput(false);
@@ -87,7 +87,9 @@ export const showJobs = async () => {
           `;
           jobsTable.appendChild(row);
         });
-        message.textContent = "Jobs loaded successfully.";
+        if (!message.textContent) {
+          message.textContent = "Jobs loaded successfully.";
+        }
       }
       setDiv(jobsDiv);
     } else {

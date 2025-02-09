@@ -109,7 +109,7 @@ export const showAddEdit = async (jobId) => {
     } catch (err) {
       console.log(err);
       message.textContent = "A communication error has occurred.";
-      showJobs();
+      await showJobs();
     }
 
     enableInput(true);
